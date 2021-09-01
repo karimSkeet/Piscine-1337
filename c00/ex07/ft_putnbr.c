@@ -11,34 +11,26 @@
 /* ************************************************************************** */
 
 #include<unistd.h>
-void 	ft_putchar(char c)
+void	ft_putchar(char c)
 {
 	write(1, &c, 1);
 }
 
 void	ft_putnbr(int nb)
 {
-	int		nbrdigits;
-	int		tab[10];
-	int		i;
-	int		n;
+	long	n;
 
 	n = nb;
-	nbrdigits = 0;
-	while (n != 0)
+	if (n < 0)
 	{
-		n = n / 10;
-		nbrdigits++;
+		ft_putchar('-');
+		n *= -1;
 	}
-	i = -1;
-	while (++i < nbrdigits)
+	if (n > 9)
 	{
-		tab[9 - i] = nb % 10;
-		nb = nb / 10;
+		ft_putnbr(n / 10);
+		ft_putnbr(n % 10);
 	}
-	i = -1;
-	while (++i < nbrdigits)
-	{
-		ft_putchar(tab[10 - nbrdigits + i] + 48);
-	}
+	else
+		ft_putchar(n + '0');
 }
